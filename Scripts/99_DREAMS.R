@@ -148,7 +148,7 @@
   # Not sure this gives much other than showing that there is a higher
   # correlation in DREAMS sites
   
-  df_flt %>% 
+  df_reg_flt %>% 
     group_by(treatment) %>% 
     summarise(corr = cor(PrEP_NEW, TX_CURR))
   
