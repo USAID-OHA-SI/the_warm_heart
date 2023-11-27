@@ -6,11 +6,17 @@
 # DATE: 2023-07-03
 # NOTES: Tim Essam | SI
 
-# LOCALS & SETUP ============================================================================
+# LOCALS & SETUP ===============================================================
 
 # Helpers
 
-mk_ptr_tbl <- function(df, mech_id, cntry = "")  {    
+mk_ptr_tbl <- function(df, mech_id, cntry = "")  { 
+  
+  # Create a subdirectory under the Images folder if none remains -- useful
+  # for staying organized with output
+  dir.create("Images/Mechs")
+  
+  # Create the base data frame for the mechanism
   ip_mdb <- 
     df %>% 
     dplyr::filter(mech_code == mech_id) %>% 
@@ -24,11 +30,17 @@ mk_ptr_tbl <- function(df, mech_id, cntry = "")  {
     dplyr::pull(mech_name)
   
   ip_mdb %>%   
-    selfdestructin5::create_mdb(ou = cntry, type = "main", metadata$curr_pd, metadata$source) %>% 
+    selfdestructin5::create_mdb(ou = cntry, 
+                                type = "main", 
+                                pd = metadata$curr_pd, 
+                                msd_source = metadata$source,
+                                legend = legend_chunk) %>% 
     gt::tab_header(
       title = glue::glue("{mech_name} PERFORMANCE SUMMARY")
     ) %>% 
-    gt::gtsave(path = "Images", filename = glue::glue("{mech_name}_mdb_main.png"))
+    gt::gtsave(path = "Images/Mechs", filename = glue::glue("{metadata$curr_pd}_{mech_name}_mdb_main.png"))
+  
+  print(glue::glue("Created table for mechanism {mech_id}"))
 }
 
 
