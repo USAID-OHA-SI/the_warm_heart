@@ -33,7 +33,9 @@
 *.dta
 *.shp
 *.dbf
-
+*.twbr
+*.twbx
+*.twb
 
 #nothing from these folders
 AI/*
