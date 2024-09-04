@@ -34,7 +34,7 @@ shpdata <- file.path(glamr::si_path("path_vector"))
 cntry <- "Malawi"
 
 df_msd <- si_path() %>% 
-  return_latest("PSNU_IM") %>% 
+  return_latest("PSNU_IM.*Malawi") %>% 
   read_psd() %>% 
   filter(country == cntry)
 
