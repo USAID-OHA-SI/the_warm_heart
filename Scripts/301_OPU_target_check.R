@@ -75,14 +75,15 @@ library(gt)
   # Create the reshaped df that is gt() ready
   summary_tbl  <- reshape_mdb_df(summary_df)
   
+  
+  
   # Try a specific country now
   create_mdb(summary_tbl, ou = "Malawi", type = "main") %>% 
-    gtExtras::gtsave_extra("Images/MWI_mdb_main_FY24Q3.pdf")
-
+    gtsave(filename = "Images/tab_1.png") 
   
   i# Create the treatment data frame needed for derived indicators
   summary_df_tx    <- make_mdb_tx_df(df_msd)
   summary_tbl_tx   <- reshape_mdb_tx_df(summary_df_tx)
   
   create_mdb(summary_tbl_tx, ou = "Malawi", type = "treatment") %>% 
-    gtsave("Images/MWI_mdb_treatment_FY24Q3.png")
+    gtsave(filename = "tab_2.html") 
